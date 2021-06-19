@@ -1,0 +1,23 @@
+<?php
+namespace restphp\biz;
+
+/**
+ * Error Code
+ * @author sofical
+ * @date 2017-03-17
+ * @package restphp\biz
+ */
+final class RestErrorCode {
+    const INVALID_ARGUMENT = 'RESTPHP/INVALID_ARGUMENT';
+    const UNKNOWN_METHOD = 'RESTPHP/UNKNOWN_METHOD';
+    const URI_NOT_FOUND = 'RESTPHP/URI_NOT_FOUND';
+    const APPLICATION_NOT_FOUND = 'RESTPHP/APPLICATION_NOT_FOUND';
+    const UNDEFINED = "RESTPHP/UNDEFINED";
+    const TPL_FILE_NOT_FOUND = 'RESTPHP/TPL_FILE_NOT_FOUND';
+    const PARAM_ERROR = 'PARAM_ERROR';
+    const DB_ERROR = 'RESTPHP/DB_ERROR';
+    const DB_ERROR_REDIS = "RESTPHP/DB_ERROR_REDIS";
+    const DB_ERROR_BAD_SQL = "RESTPHP/DB_ERROR_BAD_SQL";
+    const CODE_FILE_LOAD_ERROR = 'RESTPHP/CODE_FILE_LOAD_ERROR';
+    const CODE_DEBUG = 'RESTPHP/CODE_DEBUG';
+}
