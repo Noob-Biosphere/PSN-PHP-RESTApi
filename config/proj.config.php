@@ -2,7 +2,7 @@
 //开发配置定义
 
 //当前环镜
-define('PROJ_ENV', 'dev');
+define('PROJ_ENV', 'pro');
 
 //环镜参数
 $_EVN_PARAM_ALL = include('env.config.php');
