@@ -10,7 +10,7 @@
 1. git clone
 2. 设置服务器程序 rewrite 规则，将访问重写到 index.php 上。
 3. 访问 `https://yourdomain/build.php` 生成 Rest 框架所需的文件。
-4. 完成! 现在可以使用 REST (例如 https://yourdomain/psn/token)获取数据了。
+4. 完成! 现在可以使用 REST (例如 https://yourdomain/psn/token) 获取数据了。
 
 ## API
 API 前缀统一为 "https://yourdomain/psn"
