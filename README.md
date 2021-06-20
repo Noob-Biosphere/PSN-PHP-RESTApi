@@ -24,7 +24,7 @@ Get
 #### 参数
 1. `auth_key` : 一个字符串，用于防止 api 被滥用(自己改 `CheckAuthKey` 方法，用上这个字符串)   
 2. `npsso` : psn npsso , 在浏览器访问 psn 官网，登录 psn 后，访问 `https://yourdomain/psn/npsso` 获取 npsso
-3. `client_id` : 设备 id , 浏览器房屋内 psn 官网，登录 psn 时，浏览器地址栏上有 client_id，该项不能随机生成。
+3. `client_id` : 设备 id , 浏览器访问 psn 官网，登录 psn 时，浏览器地址栏上有 client_id，该项不能随机生成。
 
 #### 返回值
 Json Object
