@@ -1,32 +1,32 @@
 # PSN Token/GameList Rest API
-一个简单的 Rest PSN API 代理，可用于返回 PSN token 以及游戏列表。
+A simple PSN Rest API Wrapper,you can use it to get psn token/gamelist .
 
-## 引用资源
+## Based On Those Project
 - [sofical/restphp](https://github.com/sofical/restphp)
 - [Ragowit/PsnApiWrapperNet](https://github.com/Ragowit/PsnApiWrapperNet)
 - [Tustin/psn-php](https://github.com/Tustin/psn-php/)
 
-## 使用方法
+## Useage
 1. git clone
-2. 设置服务器程序 rewrite 规则，将访问重写到 index.php 上。
-3. 访问 `https://yourdomain/build.php` 生成 Rest 框架所需的文件。
-4. 完成! 现在可以使用 REST (例如 https://yourdomain/psn/token)获取数据了。
+2. set up server rewrite rules (eg:nginx or apache)
+3. in your browser,visit `https://yourdomain/build.php` to build restphp refs
+4. all done! now you can use those rest api(eg https://yourdomain/psn/token) to do something
 
 ## API
-API 前缀统一为 "https://yourdomain/psn"
+The base url is "https://yourdomain/psn"
 
 ### /token
-获取一个新 Token，用于获取游戏列表时使用。
+Get a new token,you need that token to get gamelist.
 
-#### 请求类型
+#### Type
 Get
 
-#### 参数
-1. `auth_key` : 一个字符串，用于防止 api 被滥用(自己改 `CheckAuthKey` 方法，用上这个字符串)   
-2. `npsso` : psn npsso , 在浏览器访问 psn 官网，登录 psn 后，访问 `https://yourdomain/psn/npsso` 获取 npsso
-3. `client_id` : 设备 id , 浏览器房屋内 psn 官网，登录 psn 时，浏览器地址栏上有 client_id，该项不能随机生成。
+#### Params
+1. `auth_key` : a simple string,you can use it to proect your api (may need modify `CheckAuthKey` function)   
+2. `npsso` : psn npsso , when you login psn account in your browser,visit `https://yourdomain/psn/npsso` to get your npsso.
+3. `client_id` : your client_id , you can get it in the address bar when you are trying to login psn in your browser.
 
-#### 返回值
+#### Return
 Json Object
 
 ```json
@@ -38,31 +38,31 @@ Json Object
   "error_description": ""
 }
 ```
-Code 200 一切正常，其他 Code 代表异常，需要参考 error 与 error_description
+Code 200 means everything is ok,other code means someting wrong , check error and error_des see what happen.
 
-Token 3600 秒过期（expiress），你可以记录下 Token 失效的时间，并在失效前拿一个新 Token，以便减少对服务器的访问次数。
+Token will be expired 1 hour later,you can save it and reflush it every half hour.
 
 ### /GameList
-获取游戏列表
+Get a user's gamelist.
 
-#### 请求类型
+#### Type
 Get
 
-#### 参数列表
-1. `auth_key` : 与 /token 一样
-2. `npsso` : 与 /token 一样
-3. `client_id` : 与 /token 一样
-4. `account_id` : psn 账号 id(例如:6855748483997255481), **不是** 在线 id，更不是昵称，获取方法自行百度。
-5. `token` : 从 /token 接口拿到的 token
-6. `offset` : 默认 `0`, 分页时使用
-7. `limit` : 默认 `10` , 分页时使用
-8. `categories` : 分类，默认 `ps4_game,ps5_native_game`，其他值:`ps4_nongame_mini_app`、`ps5_native_media_app`
+#### Params
+1. `auth_key` : same as /token
+2. `npsso` : same as /token
+3. `client_id` : same as /token
+4. `account_id` : psn account id(eg:6855748483997255481), **not** the online id
+5. `token` : access_token
+6. `offset` : default `0`, use for pagination
+7. `limit` : default `10` , use for pagination
+8. `categories` : default `ps4_game,ps5_native_game`,other value:`ps4_nongame_mini_app`、`ps5_native_media_app`
 
-#### 返回值
+#### Return
 
 Json
 
-- 成功
+- Success
 
 ```json
 {
@@ -114,7 +114,7 @@ Json
 }
 ```
 
-- 失败
+- Failed
 
 ```json
 {
@@ -125,4 +125,4 @@ Json
 }
 ```
 
-Code 200 为成功，其余为失败。data 字段为索尼返回的数据或 null，需要根据 code 酌情取值。
+Code 200: success,other code means failed.
