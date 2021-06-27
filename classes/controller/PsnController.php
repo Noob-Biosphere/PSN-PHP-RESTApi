@@ -235,8 +235,96 @@ class PsnController {
             }
         }
 
+
     }
 
+    /**
+     * 获取 奖杯列表（可用于游戏）
+     */
+    #RequestMapping(value="/trophy", method="GET")
+    public function GetTrophy(){
+        $auth_key= \strval(RestHttpRequest::getGet("auth_key") ?? "");
+        $account_id = \strval(RestHttpRequest::getGet("account_id") ?? "");
+        $token= \strval(RestHttpRequest::getGet("token") ?? "");
+        $offset= \intval(RestHttpRequest::getGet("offset") ?? 0);
+        $limit= \intval(RestHttpRequest::getGet("limit")?? 100);
+
+        if($auth_key === "" || $account_id== "" || $token == ""){
+
+            RestHttpResponse::json(array(
+                "code"=>400,
+                "data"=> null,
+                "error"=>"Bad request",
+                "error_description"=>"Required field not found",
+            ));
+            die();
+        }
+        $this->CheckAuthKey($auth_key);
+        
+        $header = array(
+            "Authorization"=> "Authorization:Bearer " . $token,
+        );
+
+        $getParam = array(
+            "offset"=> $offset,
+            "limit"=> $limit
+        );
+
+        $fullGetUrl = $this->restClientBase . "trophy/v1/users/" . $account_id . "/trophyTitles?" . http_build_query($getParam);
+        
+        $content = CurlTools::Http_Get($fullGetUrl,$header);
+
+
+       // {"error":{"referenceId":"1d260a61-d5d3-11eb-a414-3fb79aee9afc","code":2241025,"message":"Invalid token"}}
+
+
+
+       if($content == null || $content == ""){
+        RestHttpResponse::json(array(
+            "code"=>500,
+            "data"=>null,
+            "error"=>"req error",
+            "error_description"=>"req gamelist error,response null",
+        ));
+        die();
+        }
+        $result = null;
+        try {
+            $result = json_decode($content);
+
+            if(isset($result->error)){
+                RestHttpResponse::json(array(
+                    "code"=> $result->error->code ?? 503,
+                    "data"=> $content,
+                    "error"=>$result->error->reason ?? "Get trophy failed",
+                    "error_description"=>$result->error->message ?? "Get trophy failed",
+                ));
+                die();
+            }
+
+            RestHttpResponse::json(array(
+                "code"=> 200,
+                "data"=> $result,
+                "error"=>"",
+                "error_description"=>"",
+            ));
+            die();
+
+        } catch (\Throwable $th) {
+            if($content == null || $content == ""){
+                RestHttpResponse::json(array(
+                    "code"=>503,
+                    "data"=> $content,
+                    "error"=>"decode res error",
+                    "error_description"=>"res trophy decode error",
+                ));
+                die();
+            }
+        }
+
+       
+        // RestHttpResponse::html($content);
+    }
     /**
      * 获取 NPSSO
      */

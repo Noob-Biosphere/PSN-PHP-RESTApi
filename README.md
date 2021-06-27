@@ -42,7 +42,7 @@ Code 200 一切正常，其他 Code 代表异常，需要参考 error 与 error_
 
 Token 3600 秒过期（expiress），你可以记录下 Token 失效的时间，并在失效前拿一个新 Token，以便减少对服务器的访问次数。
 
-### /GameList
+### /GameList(挂了)
 获取游戏列表
 
 #### 请求类型
@@ -126,3 +126,74 @@ Json
 ```
 
 Code 200 为成功，其余为失败。data 字段为索尼返回的数据或 null，需要根据 code 酌情取值。
+
+
+### /Trophy
+
+获取奖杯列表（用来替代获取游戏列表）
+
+#### 请求类型
+Get
+
+#### 参数类型
+1. `auth_key` : 与 /token 一样
+2. `account_id` : psn 账号 id(例如:6855748483997255481), **不是** 在线 id，更不是昵称，获取方法自行百度。
+3. `token` : 从 /token 接口拿到的 token
+4. `offset` : 默认 `0`, 分页时使用
+5. `limit` : 默认 `10` , 分页时使用
+
+### 返回值
+Json
+
+成功
+
+```json
+{
+  "code": 200,
+  "data": {
+    "trophyTitles": [
+      {
+        "npServiceName": "trophy",
+        "npCommunicationId": "NPWR07942_00",
+        "trophySetVersion": "01.01",
+        "trophyTitleName": "Ratchet & Clank™",
+        "trophyTitleDetail": "Trophy set for Ratchet & Clank™.",
+        "trophyTitleIconUrl": "https://image.api.playstation.com/trophy/np/NPWR07942_00_006F781DB9EE3B1A96EB9472B006DA21899A916D8F/0A529D9F4EA9446B6946C0CDC64C5DD853DC79D8.PNG",
+        "trophyTitlePlatform": "PS4",
+        "hasTrophyGroups": false,
+        "definedTrophies": {
+          "bronze": 30,
+          "silver": 14,
+          "gold": 2,
+          "platinum": 1
+        },
+        "progress": 12,
+        "earnedTrophies": {
+          "bronze": 9,
+          "silver": 0,
+          "gold": 0,
+          "platinum": 0
+        },
+        "hiddenFlag": false,
+        "lastUpdatedDateTime": "2020-11-16T12:06:19Z"
+      }
+    ],
+    "nextOffset": 11,
+    "previousOffset": 9,
+    "totalItemCount": 47
+  },
+  "error": "",
+  "error_description": ""
+}
+```
+
+失败
+
+```json
+{
+  "code": 2241025,
+  "data": "{\"error\":{\"referenceId\":\"00000000-0000-0000-0000-000000000000\",\"code\":2241025,\"message\":\"Invalid token\"}}",
+  "error": "Get trophy failed",
+  "error_description": "Invalid token"
+}
+```

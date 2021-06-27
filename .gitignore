@@ -2,3 +2,4 @@
 /runtime/target/*.php
 /runtime/target/*/*.php
 /runtime/target
+php-psn-reset.zip
