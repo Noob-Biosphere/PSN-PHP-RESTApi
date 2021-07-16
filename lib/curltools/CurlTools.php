@@ -50,6 +50,10 @@ class CurlTools{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 60);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 60);
+
         $sResult = curl_exec($ch);
         if($sError=curl_error($ch)){
             error_log($sError);
@@ -78,6 +82,9 @@ class CurlTools{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //enable headers
         curl_setopt($ch, CURLOPT_HEADER, 1);
+
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 60);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 60);
         //get only headers
         // curl_setopt($ch, CURLOPT_NOBODY, 1);
 

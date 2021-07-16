@@ -152,7 +152,7 @@ class PsnController {
     }
 
     /**
-     * 获取游戏列表
+     * 获取游戏列表,貌似接口挂了
      */
     #RequestMapping(value="/gamelist", method="GET")
     public function GetGameList(){
@@ -403,6 +403,9 @@ class PsnController {
 
     private function CheckAuthKey($auth_key){
         try{
+            //auth ok
+            return;
+
             $patht = dirname(dirname(dirname(dirname(__FILE__))));
 
             $all = file_get_contents($patht . "/authkey.json");

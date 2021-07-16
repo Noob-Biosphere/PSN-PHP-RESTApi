@@ -42,7 +42,7 @@ Code 200 一切正常，其他 Code 代表异常，需要参考 error 与 error_
 
 Token 3600 秒过期（expiress），你可以记录下 Token 失效的时间，并在失效前拿一个新 Token，以便减少对服务器的访问次数。
 
-### /GameList(挂了)
+<!-- ### /GameList(挂了)
 获取游戏列表
 
 #### 请求类型
@@ -125,8 +125,7 @@ Json
 }
 ```
 
-Code 200 为成功，其余为失败。data 字段为索尼返回的数据或 null，需要根据 code 酌情取值。
-
+Code 200 为成功，其余为失败。data 字段为索尼返回的数据或 null，需要根据 code 酌情取值。 -->
 
 ### /Trophy
 

@@ -42,7 +42,7 @@ Code 200 means everything is ok,other code means someting wrong , check error an
 
 Token will be expired 1 hour later,you can save it and reflush it every half hour.
 
-### /GameList
+<!-- ### /GameList
 Get a user's gamelist.
 
 #### Type
@@ -125,4 +125,4 @@ Json
 }
 ```
 
-Code 200: success,other code means failed.
+Code 200: success,other code means failed. -->
