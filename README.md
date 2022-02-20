@@ -1,3 +1,5 @@
+# **PSN 接口失效，此项目不再维护，转而开发 Node 版(https://github.com/Noob-Biosphere/PSN-API-With-Node-Express)**
+
 # PSN Token/GameList Rest API
 一个简单的 Rest PSN API 代理，可用于返回 PSN token 以及游戏列表。
 
